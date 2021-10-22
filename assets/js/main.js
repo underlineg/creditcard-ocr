@@ -79,11 +79,21 @@ var loadImageToCanvas = function(url){
 // second try: find the edges of image, then change colors to black and white
 var drawHighContrast = function(){
     let src = cv.imread('canvasInput');
-    let dst = cv.Mat.zeros(src.rows, src.cols, cv.CV_8UC3);
-
+    
+    //Blur image in order remove some noise
+    let dst = new cv.Mat();
+    let ksize = new cv.Size(5, 5);
+    let anchor = new cv.Point(-1, -1);
+    cv.cvtColor(src, src, cv.COLOR_RGBA2RGB, 0);
+    cv.blur(src, dst, ksize, anchor, cv.BORDER_DEFAULT);
+    cv.imshow('canvasOutput', dst);
+    //endblur
+    
     //Find edges
-    let lowThreshold = 150;
-    let thresholdRatio = 1.5;
+    src = cv.imread('canvasOutput')
+    dst = cv.Mat.zeros(src.rows, src.cols, cv.CV_8UC3);
+    let lowThreshold = 180;
+    let thresholdRatio = 2;
     let lowThresholdRatio =  lowThreshold*thresholdRatio;
     let lines = new cv.Mat();
     let color = new cv.Scalar(255, 0, 0);
@@ -107,69 +117,3 @@ var drawHighContrast = function(){
     cv.imshow('canvasOutput', dst);
     src.delete(); dst.delete(); lines.delete();
 }
-
-
-/*
-    var drawHighContrast = function(){
-
-    //threshold
-
-    let src = cv.imread('canvasInput');
-    let dst = new cv.Mat();
-    let ksize = new cv.Size(8, 8);
-    let anchor = new cv.Point(-1, -1);
-
-    // first blur image to reduce noise
-    cv.cvtColor(src, src, cv.COLOR_RGBA2RGB, 0);
-    cv.blur(src, dst, ksize, anchor, cv.BORDER_DEFAULT);
-
-    cv.imshow('canvasOutput', dst);
-    // src.delete(); dst.delete();
-
-    
-    //threshold?
-    // let gray = new cv.Mat();
-    // cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY, 0);
-    // cv.threshold(gray, gray, 50, 180, cv.THRESH_BINARY_INV + cv.THRESH_OTSU);
-    // cv.imshow('canvasOutput', gray);
-    
-
-    src = cv.imread('canvasOutput');
-
-    let lowThreshold = 255;
-    let thresholdRatio = 1.5;
-    let lowThresholdRatio =  lowThreshold*thresholdRatio;
-
-    let lines = new cv.Mat();
-    let color = new cv.Scalar(255, 0, 0);
-
-
-    cv.cvtColor(src, src, cv.COLOR_RGBA2GRAY, 1);
-    cv.Canny(src, src, lowThreshold, lowThresholdRatio, 3);
-
-    // // You can try more different parameters
-    cv.HoughLinesP(src, lines, 2, Math.PI / 180, 1, 0, 0);
-    // // draw lines
-    for (let i = 0; i < lines.rows; ++i) {
-        let startPoint = new cv.Point(lines.data32S[i * 4], lines.data32S[i * 4 + 1]);
-        let endPoint = new cv.Point(lines.data32S[i * 4 + 2], lines.data32S[i * 4 + 3]);
-        cv.line(dst, startPoint, endPoint, color);
-    }
-    cv.imshow('canvasOutput', dst);
-
-    // src = cv.imread('canvasOutput');
-    //     dst = new cv.Mat();
-    //     let low = new cv.Mat(src.rows, src.cols, src.type(), [0, 0, 0, 0]);
-    //     let high = new cv.Mat(src.rows, src.cols, src.type(), [90, 255, 90, 255]);
-    //     cv.inRange(src, low, high, dst);
-
-    // cv.imshow('canvasOutput', dst);
-
-
-
-    // src.delete(); dst.delete(); lines.delete();
-}
-
-
-
-*/
