@@ -14,15 +14,20 @@
     <script src='https://docs.opencv.org/4.5.4/opencv.js'></script>
     <script src='https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js'></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js" integrity="sha256-hlKLmzaRlE8SCJC1Kw8zoUbU8BxA+8kR3gseuKfMjxA=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="assets/css/style.css">
     
 </head>
 <body>
     <main class="container">
         <div class="row justify-content-md-center text-center">
+            <div class="drag-zone">
+                <p>Arraste e solte um arquivo aqui :D</p>
+                <i class="far fa-download"></i>
+            </div>
             <div class="col-8">
                 <h2 class="my-4">OCR de cartões de crédito</h1>
-                <h4 class="my-4">Tire uma foto do seu cartão ou escolha uma foto a partir dos seus arquivos:</h2>
+                <h4 class="my-4">Tire uma foto do seu cartão ou escolha uma foto a partir dos seus arquivos abaixo. Você também pode arrastar e soltar uma foto aqui (apenas em computadores)</h2>
                 <form>
                     <div class="input-group mb-3">
                         <input type="text" class="form-control input-text-label" disabled>
@@ -50,31 +55,8 @@
                     <canvas id="canvasOutput" width="757"></canvas>
                 </div>
             </div>
-            
         </div> 
     </main>
     <script src="assets/js/main.js"></script>
-
-    <!-- <script src='https://unpkg.com/tesseract.js@v2.0.0-alpha.4/dist/tesseract.min.js'></script>
-    <script>
-        var worker = new Tesseract.TesseractWorker();
-        var OEM = Tesseract.OEM;
-
-        
-
-        worker.recognize('nubank-credit-card-pb2.png', 'eng', {
-            init_oem: OEM.TESSERACT_ONLY,
-            tessedit_char_whitelist: '0123456789/',
-        })
-        .progress(function(p){
-            console.log(p);
-        })
-        .then(function(result){
-            console.log(result);
-
-            document.querySelector('.text-waiting').innerHTML = result.html;
-        });
-    </script> -->
-
 </body>
 </html>

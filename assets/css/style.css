@@ -1,10 +1,14 @@
+body{
+    font-size: 16px;
+}
+
 #file-upload{
     display: none;
 }
 
 .canvas-container canvas{
-    /*max-width: 100%;
-     display: none; */
+    max-width: 100%;
+   /*  display: none; */
 }
 
 .hidden{
@@ -12,9 +16,32 @@
     display: none;
 }
 .show{
-    opacity: 1;
+    opacity: 1 !important;
+    display: block !important;
 }
 .wait{
     font-size: 3em;
     transition: all 300ms ease-out;
+}
+
+.drag-zone{
+    width: 50%;
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    margin-left: -25%; /* metade do width */
+    padding: 5em 0;
+    border:0.2em dashed #0d6efd;
+    border-radius: 0.2em;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 10;
+    /* opacity:0;  */
+    /* display: none; */
+    transform: scale(0);
+    transition: all 300ms ease-out;
+    pointer-events: none;
+}
+
+.drag-zone.show{
+    transform: scale(1);
 }
