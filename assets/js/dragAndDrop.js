@@ -1,5 +1,7 @@
 /* start drag and drop*/
-let dragAndDrop = function (){
+import {callTesseract} from './callTesseract';
+
+export function dragAndDrop(){
     
     $(window).on('drag dragstart dragend dragover dragenter dragleave drop', function(e){
         e.preventDefault();
@@ -37,7 +39,7 @@ let handleFileUpload = function (file) {
     reader.onloadend = function() {
         let img = document.createElement('img')
         img.src = reader.result
-        percent = $('.percent');
+        let percent = $('.percent');
         
         callTesseract( loadImageToCanvas(img.src) )
     }

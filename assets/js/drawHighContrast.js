@@ -1,12 +1,14 @@
 /* change colors to high contrast */
 // second try: find the edges of image, then change colors to black and white
-var drawHighContrast = function(){
+export function drawHighContrast(){
     let src = cv.imread('canvasInput');
     let dst = new cv.Mat();
     cv.cvtColor(src, src, cv.COLOR_RGBA2RGB, 0);
     // You can try more different parameters
     cv.bilateralFilter(src, dst, 25, 95, 95, cv.BORDER_DEFAULT);
     cv.imshow('canvasOutput', dst);
+
+    return true;
 
     /*src = cv.imread('canvasOutput')
     dst = cv.Mat.zeros(src.rows, src.cols, cv.CV_8UC3);

@@ -1,6 +1,6 @@
 //needs refinate the high contrast
-let callTesseract = function(target){
-    // console.log("calling tesseract")
+export let callTesseract = function(target){
+    console.log("calling tesseract")
     // Tesseract.recognize(
     //     target,
     //     'eng',

@@ -1,13 +1,13 @@
-let loadImageToCanvas = function(url){
-    $('.output-text').html(htmlWait)
-    $('.wait').removeClass('hidden');
-    $('.show').addClass('show');
+import {drawHighContrast} from './drawHighContrast';
+import {showPercent} from './showPercent';
+
+export function loadImageCanvas(url){
     let canvasInput = document.getElementById('canvasInput');
     let ctx = canvasInput.getContext('2d');
     let img = new Image();
     img.crossOrigin = 'anonymous';
 
-    canvasOutput = document.getElementById('canvasOutput') 
+    let canvasOutput = document.getElementById('canvasOutput') 
 
     let src = "";
     let textOutput2 = [];
@@ -15,9 +15,11 @@ let loadImageToCanvas = function(url){
         canvasInput.width = img.width;
         canvasInput.height = img.height;
         ctx.drawImage(img, 0, 0, img.width, img.height);
+        showPercent();
         drawHighContrast();
         src = ctx.getImageData(0, 0, canvasInput.width, canvasInput.height);
     };
     img.src = url;
     return  canvasOutput;
+    // return "loadImageCanvas was called"
 }
