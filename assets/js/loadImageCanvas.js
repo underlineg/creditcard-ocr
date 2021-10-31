@@ -2,6 +2,8 @@ import {drawHighContrast} from './drawHighContrast';
 import {showPercent} from './showPercent';
 
 export function loadImageCanvas(url){
+    showPercent();
+    
     let canvasInput = document.getElementById('canvasInput');
     let ctx = canvasInput.getContext('2d');
     let img = new Image();
@@ -15,7 +17,7 @@ export function loadImageCanvas(url){
         canvasInput.width = img.width;
         canvasInput.height = img.height;
         ctx.drawImage(img, 0, 0, img.width, img.height);
-        showPercent();
+        
         drawHighContrast();
         src = ctx.getImageData(0, 0, canvasInput.width, canvasInput.height);
     };

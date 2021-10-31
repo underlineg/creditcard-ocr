@@ -1,5 +1,6 @@
 /* start drag and drop*/
 import {callTesseract} from './callTesseract';
+import {loadImageCanvas} from './loadImageCanvas';
 
 export function dragAndDrop(){
     
@@ -41,7 +42,7 @@ let handleFileUpload = function (file) {
         img.src = reader.result
         let percent = $('.percent');
         
-        callTesseract( loadImageToCanvas(img.src) )
+        callTesseract( loadImageCanvas(img.src) )
     }
 }
 
